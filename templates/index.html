@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+
+
+<div class="col-md-4 offset-md-4">
+
+    {% for article in articles %}
+
+    <h1 style="font-family:fantasy;" class="mt-4"><a style="color : black; text-decoration: none;"
+            href="{% url 'article:detail' article.id %}">{{article.title}}</a></h1>
+    <p class="lead">
+        by <b> <i>{{article.author}}</i></b>
+    </p>
+
+    <p>{{article.created_date}}</p>
+
+    <p class="lead"><i>{{article.content|safe}}</i></p>
+
+    <div
+        style="margin-bottom : 20px; margin-top : 20px;display: inline-block;height:10px; width :475px; background:indianred;">
+    </div>
+
+
+    {% endfor %}
+
+</div>
+
+
+{% endblock body %}

@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+<div class="container">
+    <h3>Welcome {{request.user.username}}</h3>
+    <br><br>
+
+
+    {% if articles %}
+    <table class="table">
+        <thead style="color :red;">
+            <tr>
+                <th>id</th>
+                <th>Title</th>
+                <th>Created Date</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for article in articles %}
+            <tr>
+                <td><b>{{article.id}}</b></td>
+                <td><b><a style="color : inherit" href="{% url 'article:detail' article.id %}">{{article.title}}</a></b>
+                </td>
+                <td><b>{{article.created_date}}</b></td>
+                <td><a style="color:green;" href="{% url 'article:update' article.id %}"><i
+                            class="far fa-check-circle fa-2x"></i></a></td>
+                <td><a style="color:red;" href="{% url 'article:delete' article.id %}"><i
+                            class="far fa-trash-alt fa-2x"></i></a></td>
+            </tr>
+            {% endfor %}
+
+            {% else %}
+            <div class="alert alert-danger">You don't have any article.</div>
+            {% endif %}
+
+        </tbody>
+    </table>
+    <a class="btn btn-success" href="{% url 'article:add' %}">Add</a>
+</div>
+{% endblock body %}

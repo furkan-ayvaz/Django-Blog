@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="row">
+    <div style="border : 5px solid green; padding: 15px;;" class="col-md-4 offset-md-4">
+        <h3> Add Article </h3>
+        <hr style="background: green; height: 2px;">
+        <form method="post" class="bootstarp4">
+            {% csrf_token %}
+            {{form.media}}
+            {{form|crispy}}
+            <button style="color : green;  width: 100%; font-weight: bold;" type="submit"> Save </button>
+        </form>
+    </div>
+</div>
+{% endblock body %}

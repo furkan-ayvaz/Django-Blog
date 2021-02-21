@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+
+<div class="col-md-4 offset-md-4">
+    
+        <h1 style = "font-family: fantasy;" class="mt-4">{{article.title}}</h1>
+        <p class="lead">
+            by  <b> <i>{{article.author}}</i></b>
+        </p>
+        <hr style = "background : magenta;">
+        <p>{{article.created_date}}</p>
+        <hr style = "background : magenta;">
+        <p class="lead"><i>{{article.content|safe}}</i></p>
+       
+        <br><br><br><br>
+        <h4>Comments</h4>
+         <hr>
+         {% if comments %}
+              
+              {% for comment in comments %}
+              <div class="media mb-4">
+
+                <div class="media-body">
+                  <h5 class="mt-0">{{comment.comment_author}}</h5>
+                  {{comment.created_date}}<br>
+                  <p>{{comment.comment_content}}</p>
+                </div>
+              </div>
+              {% endfor %}
+                
+            {% else %}
+              <div class = "alert alert-danger"> There isn't comment this article</div>
+         {% endif %}
+
+         <br><br><br>
+        <div style = "border : 3px solid red;" class="card my-4">
+            <h5 class="card-header">Leave a Comment:</h5>
+            
+            <div style = "padding: 20px;" class="card-body">
+                <form method = "post" action = "{% url 'article:comment' article.id %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                    
+                      <label for="formGroupExampleInput">Name</label>
+                      <input name ="comment_author" type="text" class="form-control" id="formGroupExampleInput" placeholder="Please input your name...">
+                    </div>
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">Comment</label>
+                      <textarea name = "comment_content" class="form-control" rows="3"></textarea>
+                    </div>
+                    <button style="width : 100%;background-color : green; color : white;" type="submit" >Share</button>
+                  </form>
+            </div>
+          </div>
+    
+</div> 
+
+{% endblock body %}

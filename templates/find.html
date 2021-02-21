@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+
+
+<div class="col-md-4 offset-md-4">
+    <form style="float:center; margin-right : 50px;">
+        {% csrf_token %}
+        <div>
+            <input style="display: left; width : 100%; margin-bottom:10px;" type="text" name="keyword" class="input-sm"
+                maxlength="64" placeholder="Search...">
+            <button style="display: block; width:100%;border-radius: 0; height :30px;" type="submit"
+                class="btn btn-success">Find</button>
+        </div>
+    </form>
+    {% if articles %}
+    {% for article in articles %}
+
+    <h3 class="mt-4"><a style="text-decoration: none; font-family:fantasy; color:#000080; "
+            href="{% url 'article:detail' article.id %}">{{article.title}}</a></h3>
+
+    {% endfor %}
+
+    {% endif %}
+</div>
+
+
+{% endblock body %}

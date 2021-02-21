@@ -1,0 +1,41 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-danger fixed-top bg-inverse">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <a style="color : red;" class="navbar-brand" href="/">Code Blog</a>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+          --
+        </li>
+      <li class="nav-item active">
+        <a style="color : yellow;" class="nav-link" href="{% url 'about' %}">About</a>
+      </li>
+      <li class="nav-item active">
+        <a style="color : yellow;" class="nav-link" href="{% url 'article:find' %}">Find</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto"></ul>
+    {% if request.user.is_authenticated %}
+
+    <li class="nav-item active">
+      <a style="color : yellow;" class="nav-link" href="{% url 'article:dashboard' %}">Dashboard</a>
+    </li>
+    <li class="nav-item active">
+      <a style="color : yellow;" class="nav-link" href="{% url 'user:logout' %}">Logout</a>
+    </li>
+    {% else %}
+    <li class="nav-item active">
+      <a style="color : yellow;" class="nav-link" href="{% url 'user:register'%}">Register</a>
+    </li>
+    <li class="nav-item active">
+      <a style="color : yellow;" class="nav-link" href="{% url 'user:login'%}">Login</a>
+    </li>
+    {% endif %}
+    </ul>
+  </div>
+</nav>
