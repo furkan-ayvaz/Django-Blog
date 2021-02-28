@@ -18,7 +18,7 @@
     {% for article in articles %}
 
     <h3 class="mt-4"><a style="text-decoration: none; font-family:fantasy; color:#000080; "
-            href="{% url 'article:detail' article.id %}">{{article.title}}</a></h3>
+            href="{{article.get_absolute_url_detail}}">{{article.title}}</a></h3>
 
     {% endfor %}
 

@@ -32,27 +32,29 @@ def showArticle(request):
     return render(request,"dashboard.html",{"articles" : articles})
 
 
-def detailArticle(request,id):
-    article = get_object_or_404(Article,id = id)
+def detailArticle(request,slug):
+    article = get_object_or_404(Article,slug = slug)
     comments = article.comments.all()
     return render(request,"detail.html",{"article":article,"comments":comments})
 
 
 @login_required(login_url = "user:login")
-def updateArticle(request,id):
-    article = get_object_or_404(Article,id = id)
+def updateArticle(request,slug):
+    article = get_object_or_404(Article,slug = slug)
     form = ArticleForm(request.POST or None,instance = article)
     if form.is_valid():
-        article = form.save(commit=False)
-        article.author = request.user
-        article.save()
+        content = form.cleaned_data.get("content")
+        title = form.cleaned_data.get("title")
+        article.content = content
+        article.title = title
+        article.save(update_fields = ["content","title"])
         messages.success(request,"The article updated successfully ")
         return redirect("article:dashboard")
     return render(request,"update.html",{"form":form})
 
 @login_required(login_url="user:login")
-def deleteArticle(request,id):
-    article = get_object_or_404(Article,id = id)
+def deleteArticle(request,slug):
+    article = get_object_or_404(Article, slug = slug)
     article.delete()
     messages.success(request,"The article deleted successfully ")
     return redirect("article:dashboard")

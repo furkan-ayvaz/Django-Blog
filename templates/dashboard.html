@@ -11,8 +11,8 @@
     <table class="table">
         <thead style="color :red;">
             <tr>
-                <th>id</th>
                 <th>Title</th>
+                <th>Update Date</th>
                 <th>Created Date</th>
                 <th>Update</th>
                 <th>Delete</th>
@@ -22,13 +22,13 @@
 
             {% for article in articles %}
             <tr>
-                <td><b>{{article.id}}</b></td>
-                <td><b><a style="color : inherit" href="{% url 'article:detail' article.id %}">{{article.title}}</a></b>
+                <td><b><a style="color : inherit" href="{{article.get_absolute_url_detail}}">{{article.title}}</a></b>
                 </td>
+                <td><b>{{article.last_update}}</b></td>
                 <td><b>{{article.created_date}}</b></td>
-                <td><a style="color:green;" href="{% url 'article:update' article.id %}"><i
+                <td><a style="color:green;" href="{{article.get_absolute_url_update}}"><i
                             class="far fa-check-circle fa-2x"></i></a></td>
-                <td><a style="color:red;" href="{% url 'article:delete' article.id %}"><i
+                <td><a style="color:red;" href="{{article.get_absolute_url_delete}}"><i
                             class="far fa-trash-alt fa-2x"></i></a></td>
             </tr>
             {% endfor %}
